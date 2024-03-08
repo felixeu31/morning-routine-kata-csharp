@@ -17,7 +17,10 @@ public class MorningRoutine : IMorningRoutine
     {
         if (_clock.Now().Hour == 7)
             return "Read and study";
-        
+     
+        if (_clock.Now().Hour == 8)
+            return "Have breakfast";
+
         return "Do exercise";
     }
 }
