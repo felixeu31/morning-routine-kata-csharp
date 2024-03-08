@@ -12,20 +12,12 @@ public class MorningRoutineReminderTests
     public void remind_me_to_do_exercise_from_06_00_to_06_59()
     {
         // arrange
-        MorningRoutine reminder = new();
+        IMorningRoutine morningRoutine = new MorningRoutine();
         
         // act
-        string activityToDo = reminder.WhatShouldIDoNow();
+        string activityToDo = morningRoutine.WhatShouldIDoNow();
         
         // assert
         activityToDo.Should().Be("Do exercise");
-    }
-}
-
-public class MorningRoutine
-{
-    public string WhatShouldIDoNow()
-    {
-        return "Do exercise";
     }
 }
