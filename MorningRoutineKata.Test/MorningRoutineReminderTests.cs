@@ -11,9 +11,11 @@ public class MorningRoutineReminderTests
     }
 
     [TestCase("2024-03-08 06:00:00", "Do exercise")]
-    [TestCase("2024-03-08 06:30:00", "Do exercise")] // Example of another time within the same range
+    [TestCase("2024-03-08 06:30:00", "Do exercise")]
     [TestCase("2024-03-08 07:00:00", "Read and study")]
-    [TestCase("2024-03-08 07:30:00", "Read and study")] // Example of another time within the same range
+    [TestCase("2024-03-08 07:30:00", "Read and study")]
+    [TestCase("2024-03-08 08:00:00", "Have breakfast")]
+    [TestCase("2024-03-08 08:30:00", "Have breakfast")]
     public void WhatShouldIDoNow_GivenTime_ReturnsExpectedActivity(string time, string expectedActivity)
     {
         // arrange
