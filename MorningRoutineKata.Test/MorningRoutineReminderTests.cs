@@ -26,6 +26,6 @@ public class MorningRoutineReminder
 {
     public string Remind()
     {
-        throw new NotImplementedException();
+        return "Do exercise";
     }
 }
