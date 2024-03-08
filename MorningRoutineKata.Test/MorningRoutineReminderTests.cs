@@ -10,33 +10,21 @@ public class MorningRoutineReminderTests
     {
     }
 
-    [Test]
-    public void remind_me_to_do_exercise_from_06_00_to_06_59()
+    [TestCase("2024-03-08 06:00:00", "Do exercise")]
+    [TestCase("2024-03-08 06:30:00", "Do exercise")] // Example of another time within the same range
+    [TestCase("2024-03-08 07:00:00", "Read and study")]
+    [TestCase("2024-03-08 07:30:00", "Read and study")] // Example of another time within the same range
+    public void WhatShouldIDoNow_GivenTime_ReturnsExpectedActivity(string time, string expectedActivity)
     {
         // arrange
         Mock<IClock> clockMock = new Mock<IClock>();
-        clockMock.Setup(x => x.Now()).Returns(new DateTime(2024, 3, 8, 6, 0, 0));
+        clockMock.Setup(x => x.Now()).Returns(DateTime.Parse(time));
         IMorningRoutine morningRoutine = new MorningRoutine(clockMock.Object);
-        
-        // act
-        string activityToDo = morningRoutine.WhatShouldIDoNow();
-        
-        // assert
-        activityToDo.Should().Be("Do exercise");
-    }
 
-    [Test]
-    public void remind_me_to_read_and_study_from_07_00_to_07_59()
-    {
-        // arrange
-        Mock<IClock> clockMock = new Mock<IClock>();
-        clockMock.Setup(x => x.Now()).Returns(new DateTime(2024, 3, 8, 7, 0, 0));
-        IMorningRoutine morningRoutine = new MorningRoutine(clockMock.Object);
-        
         // act
-        string activityToDo = morningRoutine.WhatShouldIDoNow();
-        
+        var activityToDo = morningRoutine.WhatShouldIDoNow();
+
         // assert
-        activityToDo.Should().Be("Read and study");
+        activityToDo.Should().Be(expectedActivity);
     }
 }
