@@ -20,4 +20,17 @@ public class MorningRoutineReminderTests
         // assert
         activityToDo.Should().Be("Do exercise");
     }
+
+    [Test]
+    public void remind_me_to_read_and_study_from_07_00_to_07_59()
+    {
+        // arrange
+        IMorningRoutine morningRoutine = new MorningRoutine();
+        
+        // act
+        string activityToDo = morningRoutine.WhatShouldIDoNow();
+        
+        // assert
+        activityToDo.Should().Be("Read and study");
+    }
 }
