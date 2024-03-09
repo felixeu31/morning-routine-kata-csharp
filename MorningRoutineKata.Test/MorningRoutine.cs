@@ -24,12 +24,12 @@ public class MorningRoutine : IMorningRoutine
     public string WhatShouldIDoNow()
     {
         var now = TimeOnly.FromDateTime(_clock.Now());
-        
-        var matchedConfiguration = _configurations.FirstOrDefault(x => x.IsWithin(now));
 
-        if (matchedConfiguration != null)
-            return matchedConfiguration.Name;
+        return GetMatchingConfiguration(now)?.Name ?? "No activity";
+    }
 
-        return "No activity";
+    private RoutineConfiguration? GetMatchingConfiguration(TimeOnly now)
+    {
+        return _configurations.FirstOrDefault(x => x.IsWithin(now));
     }
 }
