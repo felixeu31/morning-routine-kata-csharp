@@ -8,17 +8,12 @@ public interface IMorningRoutine
 public class MorningRoutine : IMorningRoutine
 {
     private readonly IClock _clock;
-    private readonly IReadOnlyList<RoutineConfiguration> _configurations;
+    private readonly IList<RoutineConfiguration> _configurations;
 
-    public MorningRoutine(IClock clock)
+    public MorningRoutine(IClock clock, IList<RoutineConfiguration> configurations)
     {
         _clock = clock;
-        _configurations = new List<RoutineConfiguration>()
-        {
-            new RoutineConfiguration(new TimeRange(TimeOnly.Parse("06:00:00"), TimeOnly.Parse("06:59:00")), "Do exercise"),
-            new RoutineConfiguration(new TimeRange(TimeOnly.Parse("07:00:00"), TimeOnly.Parse("07:59:00")), "Read and study"),
-            new RoutineConfiguration(new TimeRange(TimeOnly.Parse("08:00:00"), TimeOnly.Parse("08:59:00")), "Have breakfast")
-        };
+        _configurations = configurations;
     }
     public string WhatShouldIDoNow()
     {
