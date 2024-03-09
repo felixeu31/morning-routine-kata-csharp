@@ -18,7 +18,7 @@ public class MorningRoutineBuilder
 
     public MorningRoutineBuilder WithConfiguration(TimeOnly from, TimeOnly to, string name)
     {
-        _configurations.Add(new RoutineConfiguration(new TimeRange(from, to), name));
+        _configurations.Add(new RoutineConfiguration(from, to, name));
         return this;
     }
 

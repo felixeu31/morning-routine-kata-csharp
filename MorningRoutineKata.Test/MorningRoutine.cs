@@ -19,7 +19,7 @@ public class MorningRoutine : IMorningRoutine
     {
         var now = TimeOnly.FromDateTime(_clock.Now());
         
-        var matchedConfiguration = _configurations.FirstOrDefault(x => x.TimeRange.IsWithin(now));
+        var matchedConfiguration = _configurations.FirstOrDefault(x => x.IsWithin(now));
 
         if (matchedConfiguration != null)
             return matchedConfiguration.Name;
@@ -27,13 +27,3 @@ public class MorningRoutine : IMorningRoutine
         return "No activity";
     }
 }
-
-public record TimeRange(TimeOnly From, TimeOnly To)
-{
-    public bool IsWithin(TimeOnly time)
-    {
-        return From <= time && time <= To;
-    }
-};
-
-public record RoutineConfiguration(TimeRange TimeRange, string Name);
