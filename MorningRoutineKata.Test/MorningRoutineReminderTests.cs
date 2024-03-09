@@ -38,4 +38,19 @@ public class MorningRoutineReminderTests
         // assert
         activityToDo.Should().Be(expectedActivity);
     }
+
+    [Test]
+    public void WithConfiguration_ForOverlappingTimes_ThrowsAnException()
+    {
+        // arrange
+        Mock<IClock> clockMock = new Mock<IClock>();
+        
+        // act
+        Action invalidConfiguration = () => new MorningRoutine(clockMock.Object)
+            .WithConfiguration(TimeOnly.Parse("06:00"), TimeOnly.Parse("06:59"), "Do exercise")
+            .WithConfiguration(TimeOnly.Parse("06:30"), TimeOnly.Parse("07:00"), "Read and study");
+        
+        // assert
+        invalidConfiguration.Should().Throw<InvalidRoutineConfigurationException>();
+    }
 }
