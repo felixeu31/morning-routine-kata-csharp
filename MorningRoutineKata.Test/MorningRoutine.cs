@@ -10,10 +10,21 @@ public class MorningRoutine : IMorningRoutine
     private readonly IClock _clock;
     private readonly IList<RoutineConfiguration> _configurations;
 
+    public MorningRoutine(IClock clock)
+    {
+        _clock = clock;
+        _configurations = new List<RoutineConfiguration>();
+    }
     public MorningRoutine(IClock clock, IList<RoutineConfiguration> configurations)
     {
         _clock = clock;
         _configurations = configurations;
+    }
+    
+    public MorningRoutine WithConfiguration(TimeOnly from, TimeOnly to, string name)
+    {
+        _configurations.Add(new RoutineConfiguration(from, to, name));
+        return this;
     }
     public string WhatShouldIDoNow()
     {

@@ -23,12 +23,10 @@ public class MorningRoutineReminderTests
         // arrange
         Mock<IClock> clockMock = new Mock<IClock>();
         clockMock.Setup(x => x.Now()).Returns(DateTime.Parse(time));
-        IMorningRoutine morningRoutine = new MorningRoutineBuilder()
-            .WithClock(clockMock.Object)
+        IMorningRoutine morningRoutine = new MorningRoutine(clockMock.Object)
             .WithConfiguration(TimeOnly.Parse("06:00"), TimeOnly.Parse("06:59"), "Do exercise")
             .WithConfiguration(TimeOnly.Parse("07:00"), TimeOnly.Parse("07:59"), "Read and study")
-            .WithConfiguration(TimeOnly.Parse("08:00"), TimeOnly.Parse("08:59"), "Have breakfast")
-            .Build();
+            .WithConfiguration(TimeOnly.Parse("08:00"), TimeOnly.Parse("08:59"), "Have breakfast");
 
         // act
         var activityToDo = morningRoutine.WhatShouldIDoNow();
