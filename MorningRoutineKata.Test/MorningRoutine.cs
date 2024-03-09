@@ -23,9 +23,7 @@ public class MorningRoutine : IMorningRoutine
     }
     public string WhatShouldIDoNow()
     {
-        var now = TimeOnly.FromDateTime(_clock.Now());
-
-        return GetMatchingConfiguration(now)?.Name ?? "No activity";
+        return GetMatchingConfiguration(_clock.Now())?.Name ?? "No activity";
     }
 
     private RoutineConfiguration? GetMatchingConfiguration(TimeOnly now)
